@@ -33,6 +33,34 @@ def load_pw(password_entry):
     password_entry.insert(0, password)      # autofill data in prompt
 
 
+def find_pw(website_entry):
+    website = website_entry.get().title()
+
+    try:
+        with open(JSON_FILE) as file:
+            data = json.load(file)
+    except FileNotFoundError:
+         ctkMb.CTkMessagebox(
+             title=website,
+             message=f"No saved passwords in data file",
+             icon="cancel"
+         )
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            ctkMb.CTkMessagebox(
+                title=website,
+                message=f"Email: {email}\nPassword: {password}"
+            )
+        else:
+            ctkMb.CTkMessagebox(
+                title=website,
+                message=f"{website} entry is not found",
+                icon="warning",
+            )
+
+
 def save(website_entry, email_entry, password_entry):
     website = website_entry.get().title()
     email = email_entry.get()

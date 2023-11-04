@@ -59,6 +59,7 @@ class UI(ctk.CTk):
             fg_color="#D4483B",
             hover_color="#b23327",
             width=120,
+            command=lambda: commands.find_pw(self.website_entry)
         )
         search_button.grid(row=0, column=2)
         #--------------------------------------
