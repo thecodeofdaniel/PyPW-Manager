@@ -88,8 +88,7 @@ class UI(ctk.CTk):
         # Entry
         email_entry = ctk.CTkEntry(master=email_frame, width=(config.SEARCHBOX_WIDTH + config.SPACER))
         email_entry.grid(row=0, column=1)
-
-        # email_entry.insert(0, "johndoe@gmail.com") # prepopulate text entry
+        email_entry.insert(0, config.EMAIL) # prepopulate text entry
         #--------------------------------------
 
 

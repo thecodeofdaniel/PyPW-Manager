@@ -14,3 +14,17 @@ HOVER_COLOR = "#b23327"
 
 # Image logo location
 IMG_FILE = f"{PATH}/logo.png"
+
+# User's email
+EMAIL_PATH = f"{PATH}/email.txt"
+default_email = "johndoe@email.com"
+EMAIL = default_email
+try:
+    with open(EMAIL_PATH, 'r') as file:
+        EMAIL = file.readline().strip()
+    
+        if EMAIL == "":
+           EMAIL = default_email
+except:
+    with open(EMAIL_PATH, 'w') as file:
+        file.write("")
