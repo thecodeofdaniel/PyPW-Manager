@@ -22,8 +22,14 @@ root = ctk.CTk()
 root.title("Password Manager")
 root.configure(padx=50, pady=50)
 
-# Center's content
+# Create frame to hold content
+content_frame = ctk.CTkFrame(master=root)
+content_frame.grid(row=0, column=0)
+content_frame.grid_columnconfigure(0, weight=1)
+
+# Center content to center of window
 root.grid_columnconfigure(0, weight=1)
+root.grid_rowconfigure(0, weight=1)
 
 
 #--------------------------------------
@@ -34,19 +40,18 @@ logo_image = ctk.CTkImage(
     size=(200, 200)
 )
 logo_label = ctk.CTkLabel(
-    master=root,
+    master=content_frame,
     image=logo_image,
     text="",
 )
 logo_label.grid(row=0, column=0)
 #--------------------------------------
 
-
 #--------------------------------------
 # WEBSITE ENTRY
 #--------------------------------------
 # Frame
-website_frame = ctk.CTkFrame(master=root)
+website_frame = ctk.CTkFrame(master=content_frame)
 website_frame.grid(row=1, column=0, columnspan=3)
 
 # Label
@@ -78,7 +83,7 @@ search_button.grid(row=0, column=2)
 # EMAIL ENTRY
 #--------------------------------------
 # Frame
-email_frame = ctk.CTkFrame(root)
+email_frame = ctk.CTkFrame(content_frame)
 email_frame.grid(row=2, column=0, columnspan=3)
 
 # Label
@@ -102,7 +107,7 @@ email_entry.grid(row=0, column=1)
 # PASSWORD ENTRY
 #--------------------------------------
 # Frame
-pw_frame = ctk.CTkFrame(root)
+pw_frame = ctk.CTkFrame(content_frame)
 pw_frame.grid(row=3, column=0, columnspan=3)
 
 # Label
@@ -134,13 +139,12 @@ password_button.grid(row=0, column=2)
 # ADD BUTTON
 #--------------------------------------
 add_button = ctk.CTkButton(
-    master=root,
+    master=content_frame,
     text="Add",
     fg_color="#D4483B",
     hover_color="#b23327",
 )
 add_button.grid(row=4, column=0, pady=(20, 0))
 #--------------------------------------
-
 
 root.mainloop()
