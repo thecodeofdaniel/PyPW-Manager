@@ -1,4 +1,6 @@
 import random
+from customtkinter import END
+
 
 def _gen_pw() -> str:
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -19,3 +21,9 @@ def _gen_pw() -> str:
     password = "".join(pw_list)
 
     return password
+
+
+def load_pw(password_entry):
+    password = _gen_pw()                    # Returns randomy generated string
+    password_entry.delete(0, END)  # delete the data in the prompt if any
+    password_entry.insert(0, password)      # autofill data in prompt
