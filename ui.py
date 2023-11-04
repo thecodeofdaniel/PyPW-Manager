@@ -59,7 +59,7 @@ class UI(ctk.CTk):
             fg_color="#D4483B",
             hover_color="#b23327",
             width=120,
-            command=lambda: commands.find_pw(self.website_entry)
+            command=lambda: commands.find_pw(self.website_entry, self)
         )
         search_button.grid(row=0, column=2)
         #--------------------------------------
@@ -127,7 +127,7 @@ class UI(ctk.CTk):
             text="Add",
             fg_color="#D4483B",
             hover_color="#b23327",
-            command=lambda: commands.save(self.website_entry, self.email_entry, self.password_entry)
+            command=lambda: commands.save(self.website_entry, self.email_entry, self.password_entry, self)
         )
         add_button.grid(row=4, column=0, pady=(20, 0))
         #--------------------------------------

@@ -5,7 +5,6 @@ import CTkMessagebox as ctkMb
 from customtkinter import END
 from config import JSON_FILE
 
-
 def _gen_pw() -> str:
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -33,7 +32,7 @@ def load_pw(password_entry):
     password_entry.insert(0, password)      # autofill data in prompt
 
 
-def find_pw(website_entry):
+def find_pw(website_entry, window):
     website = website_entry.get().title()
 
     try:
@@ -41,6 +40,7 @@ def find_pw(website_entry):
             data = json.load(file)
     except FileNotFoundError:
          ctkMb.CTkMessagebox(
+             master=window,
              title=website,
              message=f"No saved passwords in data file",
              icon="cancel"
@@ -50,30 +50,34 @@ def find_pw(website_entry):
             email = data[website]["email"]
             password = data[website]["password"]
             ctkMb.CTkMessagebox(
+                master=window,
                 title=website,
                 message=f"Email: {email}\nPassword: {password}"
             )
         else:
             ctkMb.CTkMessagebox(
+                master=window,
                 title=website,
                 message=f"{website} entry is not found",
                 icon="warning",
             )
 
 
-def save(website_entry, email_entry, password_entry):
+def save(website_entry, email_entry, password_entry, window):
     website = website_entry.get().title()
     email = email_entry.get()
     pw = password_entry.get()
 
     if not website or not pw:
         ctkMb.CTkMessagebox(
+            master=window,
             title="Error",
             message="Left website blank and/or password blank\nPlease try again.",
             icon="warning"
         )
     else:
         confirmbox = ctkMb.CTkMessagebox(
+            master=window,
             title="Confirm",
             message=f"Website: {website}\nEmail: {email}\nPassword: {pw}\n",
             option_1="Ok",
