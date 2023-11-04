@@ -15,6 +15,9 @@ HOVER_COLOR = "#b23327"
 # Image logo location
 IMG_FILE = f"{PATH}/logo.png"
 
+# JSON file to save user's passwords
+JSON_FILE = f"{PATH}/passwords.json"
+
 # User's email
 EMAIL_PATH = f"{PATH}/email.txt"
 default_email = "johndoe@email.com"

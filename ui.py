@@ -2,7 +2,7 @@ import customtkinter as ctk    # For UI
 import CTkMessagebox as ctkMb  # For Popup Boxes
 from PIL import Image          # To insert images
 import config                  # Global varibales
-from commands import load_pw   # Commands to use when user presses buttons
+import commands                # Import files containing commands
 
 
 class UI(ctk.CTk):
@@ -49,12 +49,12 @@ class UI(ctk.CTk):
         website_label.grid(row=0, column=0)
 
         # Search box
-        website_entry = ctk.CTkEntry(master=website_frame, width=config.SEARCHBOX_WIDTH)
-        website_entry.grid(row=0, column=1)
-        website_entry.focus()
+        self.website_entry = ctk.CTkEntry(master=website_frame, width=config.SEARCHBOX_WIDTH)
+        self.website_entry.grid(row=0, column=1)
+        self.website_entry.focus()
 
         search_button = ctk.CTkButton(
-            master=website_entry,
+            master=self.website_entry,
             text="Search",
             fg_color="#D4483B",
             hover_color="#b23327",
@@ -80,9 +80,9 @@ class UI(ctk.CTk):
         email_label.grid(row=0, column=0)
 
         # Entry
-        email_entry = ctk.CTkEntry(master=email_frame, width=(config.SEARCHBOX_WIDTH + config.SPACER))
-        email_entry.grid(row=0, column=1)
-        email_entry.insert(0, config.EMAIL) # prepopulate text entry
+        self.email_entry = ctk.CTkEntry(master=email_frame, width=(config.SEARCHBOX_WIDTH + config.SPACER))
+        self.email_entry.grid(row=0, column=1)
+        self.email_entry.insert(0, config.EMAIL) # prepopulate text entry
         #--------------------------------------
 
 
@@ -113,7 +113,7 @@ class UI(ctk.CTk):
             fg_color="#D4483B",
             hover_color="#b23327",
             width=120,
-            command=lambda: load_pw(self.password_entry)
+            command=lambda: commands.load_pw(self.password_entry)
         )
         password_button.grid(row=0, column=2)
         #--------------------------------------
@@ -126,6 +126,7 @@ class UI(ctk.CTk):
             text="Add",
             fg_color="#D4483B",
             hover_color="#b23327",
+            command=lambda: commands.save(self.website_entry, self.email_entry, self.password_entry)
         )
         add_button.grid(row=4, column=0, pady=(20, 0))
         #--------------------------------------

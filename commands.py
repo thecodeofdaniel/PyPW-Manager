@@ -1,5 +1,9 @@
+import json
 import random
+import CTkMessagebox as ctkMb
+
 from customtkinter import END
+from config import JSON_FILE
 
 
 def _gen_pw() -> str:
@@ -27,3 +31,48 @@ def load_pw(password_entry):
     password = _gen_pw()                    # Returns randomy generated string
     password_entry.delete(0, END)  # delete the data in the prompt if any
     password_entry.insert(0, password)      # autofill data in prompt
+
+
+def save(website_entry, email_entry, password_entry):
+    website = website_entry.get().title()
+    email = email_entry.get()
+    pw = password_entry.get()
+
+    if not website or not pw:
+        ctkMb.CTkMessagebox(
+            title="Error",
+            message="Left website blank and/or password blank\nPlease try again.",
+            icon="warning"
+        )
+    else:
+        confirmbox = ctkMb.CTkMessagebox(
+            title="Confirm",
+            message=f"Website: {website}\nEmail: {email}\nPassword: {pw}\n",
+            option_1="Ok",
+            option_2="Retry"
+        )
+
+        if confirmbox.get() == "Ok":
+
+            new_data = {
+                website: {
+                    "email": f"{email}",
+                    "password": f"{pw}",
+                }
+            }
+
+            try: # Open the file
+                with open(JSON_FILE, 'r') as file:
+                    data = json.load(file)
+            except FileNotFoundError: # Write the file with new data
+                with open(JSON_FILE, 'w') as file:
+                    json.dump(new_data, file, indent=4)
+            else: # Otherwise update the data in the json with new data
+                data.update(new_data)
+                with open(JSON_FILE, 'w') as file:
+                    json.dump(data, file, indent=4)
+            finally: # Clear entries from GUI
+                website_entry.delete(0, END)
+                password_entry.delete(0, END)
+        else:
+            confirmbox.destroy()
