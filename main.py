@@ -1,20 +1,7 @@
 import customtkinter as ctk    # For UI
 import CTkMessagebox as ctkMb  # For Popup Boxes
 from PIL import Image          # To insert images
-from os import path            # To allow file to be run anywhere
-
-
-# Gives full path of this file
-PATH = path.abspath(path.join(path.dirname(__file__), ''))
-
-
-LABEL_WIDTH = 140
-SEARCHBOX_WIDTH = 200
-GAP = 120
-FG_COLOR = "#D4483B"
-HOVER_COLOR = "#b23327"
-
-IMG_FILE = f"{PATH}/logo.png"
+import config                  # Global varibales
 
 
 class UI(ctk.CTk):
@@ -34,7 +21,7 @@ class UI(ctk.CTk):
         self.grid_rowconfigure(0, weight=1)
 
         logo_image = ctk.CTkImage(
-            dark_image=Image.open(IMG_FILE),
+            dark_image=Image.open(config.IMG_FILE),
             size=(200, 200)
         )
         logo_label = ctk.CTkLabel(
@@ -55,13 +42,13 @@ class UI(ctk.CTk):
         website_label = ctk.CTkLabel(
             master=website_frame,
             text="Website: ",
-            width=LABEL_WIDTH,
+            width=config.LABEL_WIDTH,
             anchor="e",
         )
         website_label.grid(row=0, column=0)
 
         # Search box
-        website_entry = ctk.CTkEntry(master=website_frame, width=SEARCHBOX_WIDTH)
+        website_entry = ctk.CTkEntry(master=website_frame, width=config.SEARCHBOX_WIDTH)
         website_entry.grid(row=0, column=1)
         website_entry.focus()
 
@@ -86,13 +73,13 @@ class UI(ctk.CTk):
         email_label = ctk.CTkLabel(
             master=email_frame,
             text="Email/Username: ",
-            width=LABEL_WIDTH,
+            width=config.LABEL_WIDTH,
             anchor="e"
         )
         email_label.grid(row=0, column=0)
 
         # Entry
-        email_entry = ctk.CTkEntry(master=email_frame, width=(SEARCHBOX_WIDTH + GAP))
+        email_entry = ctk.CTkEntry(master=email_frame, width=(config.SEARCHBOX_WIDTH + config.SPACER))
         email_entry.grid(row=0, column=1)
 
         # email_entry.insert(0, "johndoe@gmail.com") # prepopulate text entry
@@ -110,13 +97,13 @@ class UI(ctk.CTk):
         pw_label = ctk.CTkLabel(
             master=pw_frame,
             text="Password: ",
-            width=LABEL_WIDTH,
+            width=config.LABEL_WIDTH,
             anchor='e'
         )
         pw_label.grid(row=0, column=0)
 
         # Entry
-        self.password_entry = ctk.CTkEntry(master=pw_frame, width=SEARCHBOX_WIDTH)
+        self.password_entry = ctk.CTkEntry(master=pw_frame, width=config.SEARCHBOX_WIDTH)
         self.password_entry.grid(row=0, column=1)
 
         # Button
