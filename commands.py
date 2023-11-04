@@ -29,7 +29,7 @@ def _gen_pw() -> str:
 
 def load_pw(password_entry):
     password = _gen_pw()                    # Returns randomy generated string
-    password_entry.delete(0, END)  # delete the data in the prompt if any
+    password_entry.delete(0, END)           # delete the data in the prompt if any
     password_entry.insert(0, password)      # autofill data in prompt
 
 

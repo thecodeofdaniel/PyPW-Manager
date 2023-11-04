@@ -25,7 +25,7 @@ EMAIL = default_email
 try:
     with open(EMAIL_PATH, 'r') as file:
         EMAIL = file.readline().strip()
-    
+
         if EMAIL == "":
            EMAIL = default_email
 except:
