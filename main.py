@@ -2,6 +2,13 @@ import customtkinter as ctk    # For UI
 import CTkMessagebox as ctkMb  # For Popup Boxes
 from PIL import Image          # To insert images
 import config                  # Global varibales
+from _pw_gen import _gen_pw    # Generates password
+
+
+def gen_pw(password_entry):
+    password = _gen_pw()               # Returns randomy generated string
+    password_entry.delete(0, ctk.END)  # delete the data in the prompt if any
+    password_entry.insert(0, password) # autofill data in prompt
 
 
 class UI(ctk.CTk):
@@ -113,6 +120,7 @@ class UI(ctk.CTk):
             fg_color="#D4483B",
             hover_color="#b23327",
             width=120,
+            command=lambda: gen_pw(self.password_entry)
         )
         password_button.grid(row=0, column=2)
         #--------------------------------------
