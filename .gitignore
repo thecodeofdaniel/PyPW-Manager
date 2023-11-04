@@ -3,3 +3,6 @@
 
 # Ignore any test files
 *test*
+
+# Ignore user's email
+email.txt
