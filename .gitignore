@@ -6,3 +6,6 @@
 
 # Ignore user's email
 email.txt
+
+# Ignore json file containing user's passwords
+passwords.json
