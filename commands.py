@@ -26,13 +26,13 @@ def _gen_pw() -> str:
     return password
 
 
-def load_pw(password_entry):
+def insert_gen_pw(password_entry):
     password = _gen_pw()                    # Returns randomy generated string
     password_entry.delete(0, END)           # delete the data in the prompt if any
     password_entry.insert(0, password)      # autofill data in prompt
 
 
-def find_pw(website_entry, window):
+def search_for_pw(website_entry, window):
     website = website_entry.get().title()
 
     try:
@@ -69,7 +69,7 @@ def find_pw(website_entry, window):
             )
 
 
-def save(website_entry, email_entry, password_entry, window):
+def save_pw(website_entry, email_entry, password_entry, window):
     website = website_entry.get().title()
     email = email_entry.get()
     pw = password_entry.get()
