@@ -3,7 +3,7 @@ import random
 import CTkMessagebox as ctkMb
 
 from customtkinter import END
-from config import JSON_FILE
+from config import JSON_FILE, FG_COLOR, HOVER_COLOR
 
 def _gen_pw() -> str:
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -39,11 +39,13 @@ def find_pw(website_entry, window):
         with open(JSON_FILE) as file:
             data = json.load(file)
     except FileNotFoundError:
-         ctkMb.CTkMessagebox(
-             master=window,
-             title=website,
-             message=f"No saved passwords in data file",
-             icon="cancel"
+        ctkMb.CTkMessagebox(
+            master=window,
+            title="Error",
+            button_color=FG_COLOR,
+            button_hover_color=HOVER_COLOR,
+            message=f"No saved passwords in data file",
+            icon="cancel"
          )
     else:
         if website in data:
@@ -51,13 +53,17 @@ def find_pw(website_entry, window):
             password = data[website]["password"]
             ctkMb.CTkMessagebox(
                 master=window,
-                title=website,
+                title=f"{website} password",
+                button_color=FG_COLOR,
+                button_hover_color=HOVER_COLOR,
                 message=f"Email: {email}\nPassword: {password}"
             )
         else:
             ctkMb.CTkMessagebox(
                 master=window,
-                title=website,
+                title=f"{website} password NOT found",
+                button_color=FG_COLOR,
+                button_hover_color=HOVER_COLOR,
                 message=f"{website} entry is not found",
                 icon="warning",
             )
@@ -72,6 +78,8 @@ def save(website_entry, email_entry, password_entry, window):
         ctkMb.CTkMessagebox(
             master=window,
             title="Error",
+            button_color=FG_COLOR,
+            button_hover_color=HOVER_COLOR,
             message="Left website blank and/or password blank\nPlease try again.",
             icon="warning"
         )
@@ -79,8 +87,10 @@ def save(website_entry, email_entry, password_entry, window):
         confirmbox = ctkMb.CTkMessagebox(
             master=window,
             title="Confirm",
+            button_color=FG_COLOR,
+            button_hover_color=HOVER_COLOR,
             message=f"Website: {website}\nEmail: {email}\nPassword: {pw}\n",
-            option_1="Ok",
+            option_1="Yes",
             option_2="Retry"
         )
 

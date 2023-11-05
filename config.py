@@ -10,7 +10,7 @@ SPACER = 120
 
 # Theme
 FG_COLOR = "#D4483B"
-HOVER_COLOR = "#b23327"
+HOVER_COLOR = "#B23327"
 
 # Image logo location
 IMG_FILE = f"{PATH}/logo.png"
